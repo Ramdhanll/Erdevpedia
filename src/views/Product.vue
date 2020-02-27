@@ -49,7 +49,10 @@
                                     <h4>$ {{ productDetails.price}}</h4>
                                 </div>
                                 <div class="quantity">
-                                    <router-link to="/cart" class="primary-btn pd-cart">Add To Cart</router-link>
+                                  <router-link to="/cart">
+                                    <a href="#" @click="saveKeranjang(productDetails.id,productDetails.name, productDetails.price, productDetails.galleries[0].photo)" 
+                                    class="primary-btn pd-cart">Add To Cart</a>
+                                  </router-link>
                                 </div>
                             </div>
                         </div>
@@ -83,13 +86,8 @@ export default {
   data(){
     return{
       gambarDefault : '',
-      thumbs : [
-        "img/mickey1.jpg",
-        "img/mickey2.jpg",
-        "img/mickey3.jpg",
-        "img/mickey4.jpg",
-      ],
-      productDetails : []
+      productDetails : [],
+      keranjangUser : []
     }
   },
   methods: {
@@ -99,9 +97,29 @@ export default {
     setDataPicture(data){
       this.productDetails = data;
       this.gambarDefault = data.galleries[0].photo;
+    },
+    saveKeranjang(id,name,price,photo){
+      var productStored = {
+        "id" : id,
+        "name" : name,
+        "price" : price,
+        "photo" : photo
+      }
+
+      this.keranjangUser.push(productStored)
+      const parsed = JSON.stringify(this.keranjangUser);
+      localStorage.setItem('keranjangUser', parsed);
     }
   },
   mounted() {
+    if (localStorage.getItem('keranjangUser')) {
+      try {
+        this.keranjangUser = JSON.parse(localStorage.getItem('keranjangUser'));
+      } catch(e) {
+        localStorage.removeItem('keranjangUser');
+      }
+    }
+
     axios.get(`http://127.0.0.1:8000/api/products`,{
       params : {
         id : this.$route.params.id,

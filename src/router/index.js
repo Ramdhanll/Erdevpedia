@@ -27,12 +27,16 @@ const routes = [
     path: '/success',
     name: 'Success',
     component: Success
+  },
+  {
+    path : '*',
+    component : Home
   }
 ]
 
 const router = new VueRouter({
+  routes,
   // mode: 'history',
-  routes
 })
 
 export default router

@@ -11,7 +11,7 @@
                   <div class="pi-pic">
                       <img :src="product.galleries[0].photo" alt="" />
                       <ul>
-                          <li class="w-icon active">
+                          <li class="w-icon active" @click="saveKeranjang(product.id,product.name, product.price, product.galleries[0].photo)">
                               <a href="#"><i class="icon_bag_alt"></i></a>
                           </li>
                           <li class="quick-view">
@@ -58,6 +58,22 @@ export default {
   data(){
     return {
       products : [],
+      keranjangUser : []
+
+    }
+  },
+  methods: {
+    saveKeranjang(id,name,price,photo){
+      var productStored = {
+        "id" : id,
+        "name" : name,
+        "price" : price,
+        "photo" : photo
+      }
+
+      this.keranjangUser.push(productStored)
+      const parsed = JSON.stringify(this.keranjangUser);
+      localStorage.setItem('keranjangUser', parsed);
     }
   },
   mounted() {
