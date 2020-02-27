@@ -13,7 +13,8 @@ const routes = [
     component: Home
   },
   {
-    path: '/product',
+    path: '/product/:id',
+    props: true,
     name: 'Product',
     component: Product
   },
@@ -30,7 +31,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes
 })
 

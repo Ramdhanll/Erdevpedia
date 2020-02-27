@@ -15,7 +15,7 @@
                               <a href="#"><i class="icon_bag_alt"></i></a>
                           </li>
                           <li class="quick-view">
-                              <router-link to="/product">
+                              <router-link :to="'/product/' + product.id">
                                   + Quick View
                               </router-link>
                           </li>
@@ -27,8 +27,8 @@
                           <h5>{{ product.name }}</h5>
                       </router-link>
                       <div class="product-price">
-                          {{ product.price }}
-                          <span>{{ product.price * 10 }}</span>
+                          $ {{ product.price }}
+                          <span>$ {{ product.price * 2 }}</span>
                       </div>
                   </div>
               </div>
@@ -57,7 +57,7 @@ export default {
   },
   data(){
     return {
-      products : []
+      products : [],
     }
   },
   mounted() {
