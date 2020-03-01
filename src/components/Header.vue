@@ -31,13 +31,13 @@
                                 Keranjang Belanja &nbsp;
                                 <a href="#">
                                     <i class="icon_bag_alt"></i>
-                                    <span>{{ keranjangUser.length }}</span>
+                                    <span>{{ loadCart.length }}</span>
                                 </a>
                                 <div class="cart-hover">
                                     <div class="select-items">
                                         <table>
-                                            <tbody v-if="keranjangUser.length > 0">
-                                                <tr v-for="(keranjang, index) in keranjangUser" :key="index">
+                                            <tbody v-if="loadCart.length > 0">
+                                                <tr v-for="(keranjang, index) in loadCart" :key="index">
                                                     <td class="si-pic">
                                                         <img :src="keranjang.photo" alt="" class="photo-item"/>
                                                     </td>
@@ -82,6 +82,7 @@
 <script>
 export default {
   name: 'Header',
+  props:['loadCart'],
     data(){
         return{
         keranjangUser : [],
@@ -89,8 +90,8 @@ export default {
     },
     methods: {
       removeItem(index){
-        this.keranjangUser.splice(index,1);
-        const parsed = JSON.stringify(this.keranjangUser);
+        this.loadCart.splice(index,1);
+        const parsed = JSON.stringify(this.loadCart);
         localStorage.setItem('keranjangUser', parsed);
       }
     },
@@ -105,11 +106,11 @@ export default {
     },
     computed: {
       totalHarga() {
-        return this.keranjangUser.reduce(function(items,data){
+        return this.loadCart.reduce(function(items,data){
           return items + data.price
         },0);
       }
-    }
+    },
 }
 </script>
 

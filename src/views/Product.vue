@@ -1,6 +1,6 @@
 <template>
   <div class="product">
-    <Header></Header>
+    <Header :loadCart="keranjangUser"></Header>
     <!-- Breadcrumb Section Begin -->
     <div class="breacrumb-section text-left">
         <div class="container">
@@ -87,7 +87,7 @@ export default {
     return{
       gambarDefault : '',
       productDetails : [],
-      keranjangUser : []
+      keranjangUser : [],
     }
   },
   methods: {
@@ -129,7 +129,7 @@ export default {
     .then((data) => (this.setDataPicture(data.data.meta.data)))
     // .then((data) => (console.log(data)))
     .catch((err) => console.log(err));
-  },
+  }
 }
 </script>
 
