@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="select-total">
                                         <span>total:</span>
-                                        <h5>$12</h5>
+                                        <h5>$ {{totalHarga }}</h5>
                                     </div>
                                     <div class="select-button">
                                         <router-link to="/cart" class="primary-btn view-card">VIEW CARD</router-link>
@@ -84,7 +84,7 @@ export default {
   name: 'Header',
     data(){
         return{
-        keranjangUser : []
+        keranjangUser : [],
         }
     },
     methods: {
@@ -96,13 +96,20 @@ export default {
     },
     mounted() {
       if (localStorage.getItem('keranjangUser')) {
-      try {
-        this.keranjangUser = JSON.parse(localStorage.getItem('keranjangUser'));
-      } catch(e) {
-        localStorage.removeItem('keranjangUser');
+        try {
+          this.keranjangUser = JSON.parse(localStorage.getItem('keranjangUser'));
+        } catch(e) {
+          localStorage.removeItem('keranjangUser');
+        }
+      }
+    },
+    computed: {
+      totalHarga() {
+        return this.keranjangUser.reduce(function(items,data){
+          return items + data.price
+        },0);
       }
     }
-    },
 }
 </script>
 

@@ -49,10 +49,10 @@
                                     <h4>$ {{ productDetails.price}}</h4>
                                 </div>
                                 <div class="quantity">
-                                  <router-link to="/cart">
+                                  <!-- <router-link to="/cart"> -->
                                     <a href="#" @click="saveKeranjang(productDetails.id,productDetails.name, productDetails.price, productDetails.galleries[0].photo)" 
                                     class="primary-btn pd-cart">Add To Cart</a>
-                                  </router-link>
+                                  <!-- </router-link> -->
                                 </div>
                             </div>
                         </div>
@@ -99,6 +99,7 @@ export default {
       this.gambarDefault = data.galleries[0].photo;
     },
     saveKeranjang(id,name,price,photo){
+      this.loadCart = true;
       var productStored = {
         "id" : id,
         "name" : name,
